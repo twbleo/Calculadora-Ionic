@@ -15,7 +15,7 @@ export class HomePage {
   segundo_elemento: string = '';
   operador_selecionado: string = '';
   memoria: string = '';
-  
+
   constructor() { }
 
   digito(valor: string) {
@@ -45,8 +45,8 @@ export class HomePage {
       this.checa_operador = true;
       this.comeca_segundo_elemento = true;
       this.operador_selecionado = valor;
-      
-      
+
+
     }
   }
 
@@ -60,83 +60,66 @@ export class HomePage {
     this.memoria = this.primeiro_elemento;
     this.resultado_concluido = true;
 
-    
+
   }
 
   calcular() {
     if (this.operador_selecionado === " + " && this.segundo_elemento !== "") {
-      this.resultado = (parseFloat(this.primeiro_elemento.replace(',', '.')) + parseFloat(this.segundo_elemento.replace(',', '.'))).toString();
-      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado.replace('.', ',');
+      this.resultado = (parseFloat(this.primeiro_elemento) + parseFloat(this.segundo_elemento)).toString();
+      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado;
       this.resultado_concluido = true;
       this.resultado = '';
+
     } else if (this.operador_selecionado === " - " && this.segundo_elemento !== "") {
-      this.resultado = (parseFloat(this.primeiro_elemento.replace(',', '.')) - parseFloat(this.segundo_elemento.replace(',', '.'))).toString();
-      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado.replace('.', ',');
+      this.resultado = (parseFloat(this.primeiro_elemento) - parseFloat(this.segundo_elemento)).toString();
+      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado;
       this.resultado_concluido = true;
       this.resultado = '';
+
     } else if (this.operador_selecionado === " * " && this.segundo_elemento !== "") {
-      this.resultado = (parseFloat(this.primeiro_elemento.replace(',', '.')) * parseFloat(this.segundo_elemento.replace(',', '.'))).toString();
-      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado.replace('.', ',');
+      this.resultado = (parseFloat(this.primeiro_elemento) * parseFloat(this.segundo_elemento)).toString();
+      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado;
       this.resultado_concluido = true;
       this.resultado = '';
+
     } else if (this.operador_selecionado === " / " && this.segundo_elemento !== "") {
-      this.resultado = (parseFloat(this.primeiro_elemento.replace(',', '.')) / parseFloat(this.segundo_elemento.replace(',', '.'))).toString();
-      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado.replace('.', ',');
+      this.resultado = (parseFloat(this.primeiro_elemento) / parseFloat(this.segundo_elemento)).toString();
+      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado;
       this.resultado_concluido = true;
       this.resultado = '';
+
     } else if (this.operador_selecionado === " % " && this.segundo_elemento !== "") {
-      this.resultado = (parseFloat(this.primeiro_elemento.replace(',', '.')) % parseFloat(this.segundo_elemento.replace(',', '.'))).toString();
-      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado.replace('.', ',');
-      this.resultado_concluido = true;
-      this.resultado = '';
-    } else if (this.operador_selecionado === " √ " && this.primeiro_elemento !== "") {
-      this.resultado = Math.sqrt(parseFloat(this.primeiro_elemento.replace(',', '.'))).toString();
-      this.memoria = " √ " + this.primeiro_elemento.replace('.', ',') + " = " + this.resultado.replace('.', ',');
-      this.resultado_concluido = true;
-      this.resultado = '';
-    } else if (this.operador_selecionado === " ^ " && this.segundo_elemento !== "") {
-      this.resultado = (parseFloat(this.primeiro_elemento.replace(',', '.')) ** parseFloat(this.segundo_elemento.replace(',', '.'))).toString();
-      this.memoria = this.primeiro_elemento +  this.operador_selecionado + this.segundo_elemento + " = " + this.resultado.replace('.', ',');
+      this.resultado = (parseFloat(this.primeiro_elemento) % parseFloat(this.segundo_elemento)).toString();
+      this.memoria = this.primeiro_elemento + this.operador_selecionado + this.segundo_elemento + " = " + this.resultado;
       this.resultado_concluido = true;
       this.resultado = '';
     }
   }
-  
+
   potenciaeraiz(valor: string) {
     if (valor === ' ^ ') {
       if (this.resultado !== '0') {
         this.resultado = Math.pow(parseFloat(this.resultado), 2).toString();
         this.memoria = ' ^ ' + this.resultado;
         this.resultado_concluido = true;
+        this.resultado = '';
       }
     } else if (valor === ' √ ') {
       if (this.resultado !== '0') {
         this.resultado = Math.sqrt(parseFloat(this.resultado)).toString();
         this.memoria = ' √ ' + this.resultado;
         this.resultado_concluido = true;
+        this.resultado = '';
       }
     }
   }
 
-  virgula(valor: string) {
-    if (this.resultado_concluido) {
-      this.resultado = '0,';
-      this.resultado_concluido = false;
-      this.checa_operador = false;
-      this.segundo_elemento = '';
-    } else {
-      if (this.comeca_segundo_elemento) {
-        if (this.segundo_elemento === '') {
-          this.resultado += '0,';
-        } else if (this.segundo_elemento.indexOf(',') === -1) {
-          this.segundo_elemento += ',';
-          this.resultado += ',';
-        }
-      } else {
-        if (this.resultado.indexOf(',') === -1) {
-          this.resultado += ',';
-        }
-      }
+  Ponto() {
+    if (this.comeca_segundo_elemento && this.segundo_elemento.indexOf('.') === -1) {
+      this.segundo_elemento += '.';
+      this.resultado += '.';
+    } else if (!this.comeca_segundo_elemento && this.resultado.indexOf('.') === -1) {
+      this.resultado += '.';
     }
   }
 }
